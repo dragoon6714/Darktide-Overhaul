@@ -366,12 +366,11 @@ numeric 0.70–1.40 (2 decimals, default `1.00`).
 **Perf impact.** Wider FOV *costs* GPU (more on screen); narrower saves. This is a
 preference feature; tooltip states the cost direction.
 
-**Finding: map clutter culling is infeasible.** Scatter/prop density
+**Finding: engine scatter/LOD culling is infeasible.** Scatter/prop density
 (`lod_scatter_density`, `lod_object_multiplier`) is applied engine-side from
-`render_settings`; there is no Lua-side per-unit clutter registry to cull from, and
-`Unit.set_visibility` has no category enumeration for cosmetic props. The game's own
-options already expose these two knobs; duplicating them adds nothing. **Not implemented —
-by design.**
+`render_settings`; the game's own options already expose these knobs and duplicating them
+adds nothing. However, *unit-level* decorative clutter hiding later proved feasible via
+zero-extension classification — see §4.12 `map_reducer`.
 
 ### 4.8 Lua GC tuning — `modules/gc_tuning.lua`
 
