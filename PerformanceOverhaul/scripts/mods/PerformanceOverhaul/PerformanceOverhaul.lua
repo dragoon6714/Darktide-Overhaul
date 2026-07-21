@@ -14,7 +14,9 @@ mod.counters = mod:persistent_table("counters", {
 local MODULE_ROOT = "PerformanceOverhaul/scripts/mods/PerformanceOverhaul/modules/"
 
 -- One file per optimization system; keep in AGENT.md §9 order.
-local MODULE_NAMES = {}
+local MODULE_NAMES = {
+	"vfx_limiter",
+}
 
 -- Each module file returns a table that may define:
 --   refresh_settings(setting_id_or_nil)  -- re-read mod settings into local caches
