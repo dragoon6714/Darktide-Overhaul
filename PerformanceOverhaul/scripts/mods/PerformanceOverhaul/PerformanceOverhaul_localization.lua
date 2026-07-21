@@ -274,4 +274,34 @@ return {
 		en = "Only used in Manual step mode: how much garbage to collect per frame. Larger "
 			.. "steps clean up faster but cost more per frame; 100 KB is a safe start.",
 	},
+
+	-- Diagnostics
+	group_diag = {
+		en = "Diagnostics Overlay",
+	},
+	group_diag_description = {
+		en = "Live FPS/frametime readout plus this mod's own counters (VFX culled, sounds "
+			.. "dropped, corpses despawned...) so you can see which lever moves the needle. "
+			.. "Also available as the /po_status chat command.",
+	},
+	diag_enabled = {
+		en = "Show diagnostics overlay",
+	},
+	diag_enabled_description = {
+		en = "Shows the overlay (top-left) during gameplay. Tiny rendering cost while "
+			.. "visible; none when hidden.",
+	},
+	diag_keybind = {
+		en = "Toggle overlay keybind",
+	},
+	diag_keybind_description = {
+		en = "Optional hotkey that toggles the diagnostics overlay.",
+	},
+	diag_log_interval = {
+		en = "Log status every N seconds (0 = off)",
+	},
+	diag_log_interval_description = {
+		en = "Writes the diagnostics line to the game log (console.log) periodically — "
+			.. "useful for verifying the limiters from log files. Leave at 0 normally.",
+	},
 }

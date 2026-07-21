@@ -23,6 +23,7 @@ local MODULE_NAMES = {
 	"lighting",
 	"fov",
 	"gc_tuning",
+	"diagnostics",
 }
 
 -- Each module file returns a table that may define:

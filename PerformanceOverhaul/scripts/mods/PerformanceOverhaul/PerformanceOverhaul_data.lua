@@ -196,6 +196,31 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_diag",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "diag_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "diag_keybind",
+						type = "keybind",
+						default_value = {},
+						keybind_trigger = "pressed",
+						keybind_type = "function_call",
+						function_name = "po_toggle_diagnostics",
+					},
+					{
+						setting_id = "diag_log_interval",
+						type = "numeric",
+						default_value = 0,
+						range = { 0, 60 },
+					},
+				},
+			},
 		},
 	},
 }
