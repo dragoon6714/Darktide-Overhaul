@@ -102,6 +102,42 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_screenfx",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "screenfx_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "screenfx_suppression",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "screenfx_damage",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "screenfx_warp",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "screenfx_corruption",
+						type = "checkbox",
+						default_value = true,
+					},
+					{
+						setting_id = "screenfx_camera_shake",
+						type = "checkbox",
+						default_value = true,
+					},
+				},
+			},
 		},
 	},
 }

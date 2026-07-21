@@ -138,4 +138,57 @@ return {
 			.. "100 = effectively off. 30-60 saves CPU in dense hordes; some overlapping "
 			.. "hit/impact sounds will be missing.",
 	},
+
+	-- Screen effects
+	group_screenfx = {
+		en = "Screen Effects",
+	},
+	group_screenfx_description = {
+		en = "Per-category toggles for fullscreen overlay effects and camera shake. "
+			.. "Unchecking a category hides its overlay particles; the subtle color/vignette "
+			.. "part of these effects still shows.",
+	},
+	screenfx_enabled = {
+		en = "Enable screen effect filtering",
+	},
+	screenfx_enabled_description = {
+		en = "Master switch. Off = all screen effects and camera shake behave as vanilla.",
+	},
+	screenfx_suppression = {
+		en = "Show suppression effects",
+	},
+	screenfx_suppression_description = {
+		en = "Fullscreen blur/distortion when suppressed by gunfire. Unchecking improves "
+			.. "visibility and saves GPU exactly during heavy ranged fights — but you lose "
+			.. "the visual cue that you are suppressed.",
+	},
+	screenfx_damage = {
+		en = "Show damage / low-health effects",
+	},
+	screenfx_damage_description = {
+		en = "Blood-on-screen and warning overlays when hit, out of toughness, on last wound "
+			.. "or knocked down. Unchecking removes distracting overlays but also weakens "
+			.. "feedback about how much trouble you are in.",
+	},
+	screenfx_warp = {
+		en = "Show psyker warp/peril effects",
+	},
+	screenfx_warp_description = {
+		en = "Warp overlay effects as peril rises (your own character). Unchecking clears the "
+			.. "screen at high peril; watch the peril meter instead so you do not explode.",
+	},
+	screenfx_corruption = {
+		en = "Show corruption ambience effects",
+	},
+	screenfx_corruption_description = {
+		en = "Corruption zone / daemonic proximity screen distortion. Unchecking removes an "
+			.. "atmospheric (and GPU-costly) overlay; corrupted areas look more ordinary.",
+	},
+	screenfx_camera_shake = {
+		en = "Allow camera shake",
+	},
+	screenfx_camera_shake_description = {
+		en = "Unchecking blocks explosion/impact camera shake events for a steadier image. "
+			.. "No performance cost either way; purely comfort/visibility.",
+	},
 }
