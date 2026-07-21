@@ -83,6 +83,44 @@ return {
 						default_value = 0,
 						range = { 0, 60 },
 					},
+					{
+						setting_id = "corpse_deletion_mode",
+						type = "dropdown",
+						default_value = "vanilla",
+						options = {
+							{ text = "corpse_deletion_vanilla", value = "vanilla" },
+							{ text = "corpse_deletion_fast", value = "fast" },
+							{ text = "corpse_deletion_instant", value = "instant" },
+						},
+					},
+				},
+			},
+			{
+				setting_id = "group_anim",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "anim_lod_distance",
+						type = "numeric",
+						default_value = 0,
+						range = { 0, 30 },
+					},
+				},
+			},
+			{
+				setting_id = "group_map",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "map_reducer_mode",
+						type = "dropdown",
+						default_value = "off",
+						options = {
+							{ text = "map_reducer_off", value = "off" },
+							{ text = "map_reducer_conservative", value = "conservative" },
+							{ text = "map_reducer_aggressive", value = "aggressive" },
+						},
+					},
 				},
 			},
 			{

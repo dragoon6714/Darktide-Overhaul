@@ -117,7 +117,7 @@ local function build_status_text()
 			.. "blood balls culled %d/s (total %d)\n"
 			.. "audio dropped %d/s (total %d)\n"
 			.. "corpses despawned %d/s (total %d)\n"
-			.. "moods filtered %d | shakes blocked %d",
+			.. "moods filtered %d | shakes blocked %d | clutter hidden %d",
 		fps, avg_ms * 1000, max_ms * 1000, lua_memory_mb(),
 		ragdolls and tostring(ragdolls) or "-", minions and tostring(minions) or "-",
 		decal_info or "-",
@@ -125,7 +125,7 @@ local function build_status_text()
 		rates.blood_balls_culled, counters.blood_balls_culled,
 		rates.audio_dropped, counters.audio_dropped,
 		rates.corpses_despawned, counters.corpses_despawned,
-		counters.moods_filtered, counters.shakes_blocked)
+		counters.moods_filtered, counters.shakes_blocked, counters.clutter_hidden or 0)
 end
 
 local diagnostics = {

@@ -83,6 +83,14 @@ and do not fake it.
   overlay can prove the lever moves;
 - never assumes another module is loaded or enabled.
 
+**v2 module contract** (modules added after the initial ten): the file returns a table
+exporting **exactly** `apply(settings)`, `revert()`, `on_setting_changed(id, value)`.
+`settings` is a read-through view where `settings.foo == mod:get("foo")`. The entry point
+maps `on_enabled → apply`, `on_disabled → revert`, and forwards `on_setting_changed` with
+the new value. Hooks are still registered at file load (registration is not an export) and
+must self-gate on module state. Max ~120 lines per v2 module; no cross-module
+dependencies. Current v2 modules: `corpse_deletion`, `anim_throttle`, `map_reducer`.
+
 **Hook registration.** Hooks are registered once at file load using the *string* class-name
 form (e.g. `mod:hook("FxSystem", "trigger_vfx", ...)`). DMF resolves string targets against
 `_G` and then `_G.CLASS` (see `dmf/scripts/mods/dmf/modules/core/hooks.lua`,
@@ -416,6 +424,92 @@ from `console.log` without seeing the screen.
 
 **Perf impact.** Slight cost when visible (text redraw). Off by default.
 
+### 4.10 Instant corpse deletion — `modules/corpse_deletion.lua` (v2 contract)
+
+**What it does.** Vanilla / Fast / Instant selector that drives the game's existing
+despawn path with an effective cap of nil / 6 / 0. No parallel deletion system: the
+eviction is the same `_remove_ragdoll` → `mark_for_deletion` loop the game runs for its
+own `max_ragdolls` cap.
+
+**Verified hook target.** `MinionRagdoll.create_ragdoll` (`minion_ragdoll.lua:132`),
+`hook_safe` (post-execution eviction; no return value). Coexists with the fine-grained
+`corpse_control` sliders — the strictest cap wins.
+
+**Settings.** `corpse_deletion_mode` dropdown: `vanilla` **(neutral)** / `fast` / `instant`.
+
+**Perf impact.** CPU — the biggest single corpse lever; Instant means no ragdoll ever
+simulates more than one frame.
+
+### 4.11 Animation throttling — `modules/anim_throttle.lua` (v2 contract)
+
+**What it does.** Moves the distance at which the engine's existing bone-LOD system
+reduces minion animation updates. Vanilla thresholds are 7/8 m
+(`scripts/foundation/utilities/parameters/default_game_parameters.lua:51-52`).
+
+**Verified hook target.** `BoneLodManager.init` (`scripts/managers/bone_lod/bone_lod_manager.lua:6-24`)
+reads `GameParameters.bone_lod_in_distance/out_distance` and calls engine
+`BoneLod.init(lod_in, lod_out, update_mode)` once per gameplay world. Regular hook swaps
+the GameParameters values around `func` and restores them immediately (no lasting
+mutation). Takes effect at mission start; the module logs this.
+
+**Finding (partial): update-rate divisor is INFEASIBLE.** `BoneLod.init` accepts only
+three fixed engine modes (`USE_ALL_BONE_LOD` / `USE_ALL_EXCEPT_ROOT_BONE_LOD` /
+`USE_HIGHEST_NON_ROOT_BONE_LOD`); no rate parameter exists in any Lua-visible API. Only
+the distance threshold shipped.
+
+**Settings.** `anim_lod_distance` numeric 0–30 m, `0` = vanilla **(neutral)**.
+
+**Perf impact.** CPU (bone animation update cost for distant minions). Note lowering has
+diminishing returns — vanilla already throttles beyond 8 m; raising the value is a
+quality *improvement* at CPU cost.
+
+### 4.12 Map rendering reducer — `modules/map_reducer.lua` (v2 contract)
+
+**What it does.** Hides purely decorative level units. Classification is evidence-only:
+a unit is hidden **only if** it has zero script extensions
+(`ScriptUnit.extensions(unit)` empty — `script_unit.lua:56` returns the per-unit
+extension map, and every interactive object — pickup, door, objective, destructible,
+health station — carries an extension), is not in a `"NavGate"` visibility group
+(nav-relevance pattern from `destructible_extension.lua:246`), and — in Conservative
+mode — owns no lights (`Unit.num_lights`). Aggressive additionally hides extension-less
+light-fixture meshes (their light keeps shining; documented artifact).
+
+**Verified APIs.** `Level.units(level)` enumeration
+(`scripts/loading/expedition_spawner.lua:107`); level handle via
+`Managers.state.mission:mission_level()` (`mission_manager.lua:50`);
+`Unit.set_unit_visibility(unit, bool)` (multiple game call sites, e.g.
+`scripts/components/level_prop_customization.lua:36`); scan triggered by `hook_safe` on
+`StateGameplay.on_enter` (`state_gameplay.lua:11`), restored on `on_exit` and `revert()`.
+
+**Known risks (documented, feature is opt-in + experimental-labelled).** Extension-less
+units *could* include architecture meshes on some maps (unit resource names are not
+readable from Lua — `Unit.debug_name` is never used in retail scripts, so name-based
+classification is unverifiable). Purely local-visual either way; toggling Off restores
+everything live. `Unit.set_unit_visibility` does not stop CPU-side simulation — savings
+are GPU-only and scale with scene clutter.
+
+**Settings.** `map_reducer_mode` dropdown: `off` **(neutral)** / `conservative` /
+`aggressive`.
+
+### 4.13 Feature-round-2 infeasibility findings (researched, not shipped)
+
+- **Mesh quality / LOD bias sliders.** `lod_object_multiplier` (0.5–5.0,
+  `require_apply = true`) and `lod_scatter_density` are consumed engine-side via the
+  options pipeline (`settings_utils.lua` → `Application.set_render_setting` +
+  `Application.apply_user_settings()`), and both are ALREADY user-facing in the game's
+  video options at those exact ranges. A mod slider would duplicate an existing option
+  while permanently rewriting the user's config (guardrail §6.5), and beyond-range
+  values cannot be verified to apply. **Not shipped — no placebo sliders.**
+- **Texture quality.** Per-category mip offsets in `texture_settings` carry
+  `require_restart = true` on every tier (`render_settings.lua:1370-1445`): runtime
+  application from Lua is verifiably impossible, and the option already exists in the
+  game's video settings. **Not shipped.**
+- **Ambient light boost.** No ambient/sun/light-intensity shading-environment parameter
+  name appears anywhere in game Lua (the full set used from scripts:
+  `exposure_compensation`, `exposure_snap`, `fullscreen_blur_*`, `grey_scale_*`,
+  `dof_*`). Setting a guessed parameter name would be placebo. Brightness/exposure is
+  covered by the existing `lighting` module (§4.6). **Ambient not shipped.**
+
 ---
 
 ## 5. DMF conventions (verified against DMF source + wiki)
@@ -587,3 +681,7 @@ Each task: implement → static-verify (§7A) → update AGENT.md if reality div
 
 After task 10: full localization/widget cross-check (§7A.3), a final in-game verification
 pass (§7B) on a game-equipped machine, and a README for end users.
+
+Round 2 (completed): 11. **corpse_deletion** per §4.10; 12. **anim_throttle** per §4.11;
+13. **map_reducer** per §4.12. Mesh quality, texture quality, ambient boost and the
+animation update-rate divisor were researched and documented infeasible in §4.11/§4.13.

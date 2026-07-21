@@ -113,6 +113,71 @@ return {
 		en = "Force-despawns corpses older than this many seconds. 0 leaves despawning to the "
 			.. "game. 10-20s clears horde aftermath quickly; bodies visibly disappear sooner.",
 	},
+	corpse_deletion_mode = {
+		en = "Corpse deletion",
+	},
+	corpse_deletion_mode_description = {
+		en = "Drives the game's own despawn path harder. Fast keeps only ~6 bodies; Instant "
+			.. "removes each corpse the moment it hits the floor — maximum CPU savings, but "
+			.. "kills feel weightless with no bodies left behind. Overrides the sliders above "
+			.. "when stricter.",
+	},
+	corpse_deletion_vanilla = {
+		en = "Vanilla",
+	},
+	corpse_deletion_fast = {
+		en = "Fast (keep ~6 bodies)",
+	},
+	corpse_deletion_instant = {
+		en = "Instant (no bodies)",
+	},
+
+	-- Animation throttling
+	group_anim = {
+		en = "Animation Throttling",
+	},
+	group_anim_description = {
+		en = "Controls the distance at which enemy bone animation quality is reduced, using "
+			.. "the game's built-in bone LOD system (vanilla reduces beyond 8m). An update-rate "
+			.. "divisor is not possible from Lua — the engine only exposes fixed LOD modes.",
+	},
+	anim_lod_distance = {
+		en = "Bone LOD distance (meters, 0 = vanilla)",
+	},
+	anim_lod_distance_description = {
+		en = "Distance beyond which enemy animations use reduced bone updates. Vanilla is 8m. "
+			.. "Lower (e.g. 3) saves CPU in hordes but nearby enemies animate coarser; higher "
+			.. "(e.g. 20) IMPROVES animation quality at a CPU cost. Takes effect at next "
+			.. "mission start.",
+	},
+
+	-- Map reducer
+	group_map = {
+		en = "Map Rendering Reducer",
+	},
+	group_map_description = {
+		en = "Hides purely decorative level units. Only units with zero gameplay logic "
+			.. "attached are ever touched — pickups, doors, objectives and destructibles are "
+			.. "never affected. Experimental: may hide scenery you'd rather keep.",
+	},
+	map_reducer_mode = {
+		en = "Clutter reduction",
+	},
+	map_reducer_mode_description = {
+		en = "Conservative hides extension-less decorative units that own no lights. "
+			.. "Aggressive also hides light-fixture meshes (their light keeps shining — can "
+			.. "look odd). GPU savings scale with how cluttered the map is; scenes look "
+			.. "barer. Purely visual and local; revert any time.",
+	},
+	map_reducer_off = {
+		en = "Off",
+	},
+	map_reducer_conservative = {
+		en = "Conservative",
+	},
+	map_reducer_aggressive = {
+		en = "Aggressive (incl. light fixtures)",
+	},
 
 	-- Audio limiter
 	group_audio = {
