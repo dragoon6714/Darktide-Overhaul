@@ -16,6 +16,7 @@ local MODULE_ROOT = "PerformanceOverhaul/scripts/mods/PerformanceOverhaul/module
 -- One file per optimization system; keep in AGENT.md §9 order.
 local MODULE_NAMES = {
 	"vfx_limiter",
+	"decal_control",
 }
 
 -- Each module file returns a table that may define:

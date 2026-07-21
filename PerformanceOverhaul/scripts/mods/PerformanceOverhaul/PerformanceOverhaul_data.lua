@@ -38,6 +38,30 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_decal",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "decal_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "decal_max_count",
+						type = "numeric",
+						default_value = 100,
+						range = { 0, 100 },
+					},
+					{
+						setting_id = "decal_lifetime_mult",
+						type = "numeric",
+						default_value = 1.0,
+						range = { 0.1, 1.0 },
+						decimals_number = 2,
+					},
+				},
+			},
 		},
 	},
 }

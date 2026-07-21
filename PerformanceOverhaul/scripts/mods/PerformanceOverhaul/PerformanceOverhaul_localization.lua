@@ -52,4 +52,35 @@ return {
 		en = "Unconditionally removes muzzle smoke and weapon one-shot effects from all "
 			.. "characters. Saves GPU in ranged fights; reduces visual feedback of gunfire.",
 	},
+
+	-- Decal control
+	group_decal = {
+		en = "Decal Manager",
+	},
+	group_decal_description = {
+		en = "Caps how many blood/impact/footstep decals can exist and how long they live, "
+			.. "on top of your normal graphics settings.",
+	},
+	decal_enabled = {
+		en = "Enable decal limits",
+	},
+	decal_enabled_description = {
+		en = "Master switch. Off = the game's own decal settings apply unchanged.",
+	},
+	decal_max_count = {
+		en = "Max decals per type",
+	},
+	decal_max_count_description = {
+		en = "Hard cap on each decal pool (blood, impacts, footsteps), applied on top of the "
+			.. "in-game setting — whichever is lower wins. Fewer decals = less GPU fill on "
+			.. "gore-covered floors; scenes look cleaner/less battle-worn.",
+	},
+	decal_lifetime_mult = {
+		en = "Decal lifetime multiplier",
+	},
+	decal_lifetime_mult_description = {
+		en = "Scales how long decals stay before fading (1.00 = vanilla, 0.5 = half as long). "
+			.. "Shorter lifetime keeps long fights in one room from accumulating painted "
+			.. "surfaces; blood evidence of the battle disappears sooner.",
+	},
 }
