@@ -21,6 +21,7 @@ local MODULE_NAMES = {
 	"audio_limiter",
 	"screen_effects",
 	"lighting",
+	"fov",
 }
 
 -- Each module file returns a table that may define:

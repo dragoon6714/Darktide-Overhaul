@@ -216,4 +216,27 @@ return {
 			.. "1.0 lifts shadows noticeably; 3.0 approaches flat/fullbright and looks washed "
 			.. "out. Zero performance impact either way.",
 	},
+
+	-- FOV
+	group_fov = {
+		en = "Field of View",
+	},
+	group_fov_description = {
+		en = "Extra FOV multiplier applied on top of the in-game FOV slider, allowing values "
+			.. "beyond the stock range.",
+	},
+	fov_enabled = {
+		en = "Enable FOV multiplier",
+	},
+	fov_enabled_description = {
+		en = "Master switch. Off = the in-game FOV setting applies unchanged.",
+	},
+	fov_multiplier = {
+		en = "FOV multiplier",
+	},
+	fov_multiplier_description = {
+		en = "Multiplies your effective FOV (1.00 = vanilla). Above 1.0 shows more of the "
+			.. "battlefield but COSTS GPU (more on screen) and distorts edges; below 1.0 "
+			.. "zooms in slightly and saves GPU.",
+	},
 }

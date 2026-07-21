@@ -156,6 +156,24 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_fov",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "fov_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "fov_multiplier",
+						type = "numeric",
+						default_value = 1.0,
+						range = { 0.7, 1.4 },
+						decimals_number = 2,
+					},
+				},
+			},
 		},
 	},
 }
