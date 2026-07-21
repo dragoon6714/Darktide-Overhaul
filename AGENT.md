@@ -155,10 +155,13 @@ since horde spikes are spawn-rate spikes.
   `scripts/extension_systems/fx/fx_system.lua:328` (solo/host path).
 - `FxSystem.rpc_trigger_vfx(self, channel_id, vfx_id, position, optional_rotation)` —
   `fx_system.lua:530` (online client receive; map `vfx_id` back via `NetworkLookup.vfx`).
-- `FxSystem.play_impact_fx(...)` — `fx_system.lua:203` and its client receives
-  `rpc_play_impact_fx` (`:482`), `rpc_play_surface_impact_fx` (`:500`),
-  `rpc_play_shotshell_surface_impact_fx` (`:516`). Impact fx are highest priority —
-  only dropped above 150% of budget, never when the target is a player unit.
+- `FxSystem.play_impact_fx(...)` — `fx_system.lua:203`, plus
+  `play_surface_impact_fx` (`:235`) and `play_shotshell_surface_impact_fx` (`:275`).
+  Their `rpc_*` client receives (`:482`/`:500`/`:516`) **call through these local
+  methods**, so hooking the three local methods covers both online and solo — do not
+  also hook the rpc twins (double-counting). Impact fx are highest priority — only
+  dropped above 150% of budget, never when the target is a player unit
+  (`Managers.player:player_by_unit`, `scripts/foundation/managers/player/player_manager.lua:431`).
 - `BloodManager.queue_blood_ball(self, position, direction, blood_ball_unit, optional_damage_type)`
   — `scripts/managers/blood/blood_manager.lua:102` (blood mist/balls; already
   client-local, no rpc twin needed).
@@ -257,7 +260,10 @@ the tooltip.
 - `FxSystem.trigger_wwise_event(self, event_name, optional_position, optional_unit, ...)`
   — `fx_system.lua:344` (solo/host path). Only drop when `optional_position` or
   `optional_unit` is present (3D one-shots) — never 2D/UI/music paths.
+- `FxSystem.trigger_local_unit_wwise_event(self, event_name, unit, optional_node)` —
+  `fx_system.lua:335` (local 3D unit foley; no return value).
 - `FxSystem.rpc_trigger_wwise_event(...)` — `fx_system.lua:542` (online client receive).
+  Ambisonics events (ambience beds) always pass.
 - Never hook dialogue/VO systems (`dialogues/`) — mission-critical audio.
 
 **Settings**

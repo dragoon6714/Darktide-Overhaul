@@ -1,7 +1,7 @@
 local mod = get_mod("PerformanceOverhaul")
 
 -- Shared diagnostics counters. Persistent so Ctrl+Shift+R mod reloads keep history.
-mod.counters = mod:persistent_table("counters", {
+local COUNTER_DEFAULTS = {
 	vfx_spawned = 0,
 	vfx_culled = 0,
 	blood_balls_culled = 0,
@@ -9,7 +9,17 @@ mod.counters = mod:persistent_table("counters", {
 	corpses_despawned = 0,
 	moods_filtered = 0,
 	shakes_blocked = 0,
-})
+}
+
+mod.counters = mod:persistent_table("counters", COUNTER_DEFAULTS)
+
+-- A table persisted by an older mod version may lack newer keys; nil arithmetic inside
+-- a regular hook would crash the game, so backfill defensively.
+for key, value in pairs(COUNTER_DEFAULTS) do
+	if mod.counters[key] == nil then
+		mod.counters[key] = value
+	end
+end
 
 local MODULE_ROOT = "PerformanceOverhaul/scripts/mods/PerformanceOverhaul/modules/"
 
