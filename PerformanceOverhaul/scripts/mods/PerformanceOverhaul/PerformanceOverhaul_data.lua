@@ -85,6 +85,23 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_audio",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "audio_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "audio_budget",
+						type = "numeric",
+						default_value = 100,
+						range = { 10, 100 },
+					},
+				},
+			},
 		},
 	},
 }

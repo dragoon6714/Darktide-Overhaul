@@ -18,6 +18,7 @@ local MODULE_NAMES = {
 	"vfx_limiter",
 	"decal_control",
 	"corpse_control",
+	"audio_limiter",
 }
 
 -- Each module file returns a table that may define:

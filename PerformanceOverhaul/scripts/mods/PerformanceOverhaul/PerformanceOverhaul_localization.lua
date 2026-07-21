@@ -113,4 +113,29 @@ return {
 		en = "Force-despawns corpses older than this many seconds. 0 leaves despawning to the "
 			.. "game. 10-20s clears horde aftermath quickly; bodies visibly disappear sooner.",
 	},
+
+	-- Audio limiter
+	group_audio = {
+		en = "Audio Event Limiter",
+	},
+	group_audio_description = {
+		en = "Rate-limits 3D positional sound effects during spam peaks. Note: this limits how "
+			.. "many sound events *start* per second (a Lua-side limit); the audio engine's own "
+			.. "internal voice management is not reachable by mods.",
+	},
+	audio_enabled = {
+		en = "Enable audio event limiter",
+	},
+	audio_enabled_description = {
+		en = "Master switch. Off = all sound events fire as vanilla. Music, UI sounds, "
+			.. "dialogue and ambience beds are never limited.",
+	},
+	audio_budget = {
+		en = "3D sound events per second",
+	},
+	audio_budget_description = {
+		en = "Maximum positional one-shot sounds per second; excess is silently dropped. "
+			.. "100 = effectively off. 30-60 saves CPU in dense hordes; some overlapping "
+			.. "hit/impact sounds will be missing.",
+	},
 }
