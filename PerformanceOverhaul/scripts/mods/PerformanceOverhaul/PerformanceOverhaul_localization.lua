@@ -83,4 +83,34 @@ return {
 			.. "Shorter lifetime keeps long fights in one room from accumulating painted "
 			.. "surfaces; blood evidence of the battle disappears sooner.",
 	},
+
+	-- Corpse control
+	group_corpse = {
+		en = "Corpse / Ragdoll Control",
+	},
+	group_corpse_description = {
+		en = "Limits how many dead bodies stay around and for how long. Local-visual only; "
+			.. "other players see their own settings.",
+	},
+	corpse_enabled = {
+		en = "Enable corpse limits",
+	},
+	corpse_enabled_description = {
+		en = "Master switch. Off = the game's own Max Ragdolls setting applies unchanged.",
+	},
+	corpse_max_ragdolls = {
+		en = "Max simultaneous corpses",
+	},
+	corpse_max_ragdolls_description = {
+		en = "Caps ragdolls on top of the in-game Max Ragdolls setting — whichever is lower "
+			.. "wins (oldest bodies vanish first). Big CPU/frame-time win right after hordes; "
+			.. "battlefields look emptier.",
+	},
+	corpse_max_age = {
+		en = "Corpse lifetime (seconds, 0 = vanilla)",
+	},
+	corpse_max_age_description = {
+		en = "Force-despawns corpses older than this many seconds. 0 leaves despawning to the "
+			.. "game. 10-20s clears horde aftermath quickly; bodies visibly disappear sooner.",
+	},
 }

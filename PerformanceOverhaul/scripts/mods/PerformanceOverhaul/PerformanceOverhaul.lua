@@ -17,6 +17,7 @@ local MODULE_ROOT = "PerformanceOverhaul/scripts/mods/PerformanceOverhaul/module
 local MODULE_NAMES = {
 	"vfx_limiter",
 	"decal_control",
+	"corpse_control",
 }
 
 -- Each module file returns a table that may define:

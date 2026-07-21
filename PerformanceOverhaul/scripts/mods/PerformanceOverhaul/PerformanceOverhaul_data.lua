@@ -62,6 +62,29 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_corpse",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "corpse_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "corpse_max_ragdolls",
+						type = "numeric",
+						default_value = 50,
+						range = { 3, 50 },
+					},
+					{
+						setting_id = "corpse_max_age",
+						type = "numeric",
+						default_value = 0,
+						range = { 0, 60 },
+					},
+				},
+			},
 		},
 	},
 }
