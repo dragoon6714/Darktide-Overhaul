@@ -239,4 +239,39 @@ return {
 			.. "battlefield but COSTS GPU (more on screen) and distorts edges; below 1.0 "
 			.. "zooms in slightly and saves GPU.",
 	},
+
+	-- GC tuning
+	group_gc = {
+		en = "Lua GC Tuning",
+	},
+	group_gc_description = {
+		en = "Tunes the game's Lua garbage collector to trade a little average CPU for fewer "
+			.. "frame-time hitches. Advanced — leave on Vanilla unless you see periodic "
+			.. "micro-stutter.",
+	},
+	gc_mode = {
+		en = "GC mode",
+	},
+	gc_mode_description = {
+		en = "Vanilla = untouched. Smooth = collect more eagerly in smaller chunks (slightly "
+			.. "more total GC CPU, smaller spikes). Manual step additionally runs a small "
+			.. "bounded collection step every frame. Wrong tuning can LOWER average FPS; "
+			.. "verify with the diagnostics overlay.",
+	},
+	gc_mode_vanilla = {
+		en = "Vanilla",
+	},
+	gc_mode_smooth = {
+		en = "Smooth (eager increments)",
+	},
+	gc_mode_manual_step = {
+		en = "Manual step (eager + per-frame step)",
+	},
+	gc_step_kb = {
+		en = "Manual step size (KB)",
+	},
+	gc_step_kb_description = {
+		en = "Only used in Manual step mode: how much garbage to collect per frame. Larger "
+			.. "steps clean up faster but cost more per frame; 100 KB is a safe start.",
+	},
 }

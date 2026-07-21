@@ -174,6 +174,28 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_gc",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "gc_mode",
+						type = "dropdown",
+						default_value = "vanilla",
+						options = {
+							{ text = "gc_mode_vanilla", value = "vanilla" },
+							{ text = "gc_mode_smooth", value = "smooth" },
+							{ text = "gc_mode_manual_step", value = "manual_step" },
+						},
+					},
+					{
+						setting_id = "gc_step_kb",
+						type = "numeric",
+						default_value = 100,
+						range = { 10, 500 },
+					},
+				},
+			},
 		},
 	},
 }

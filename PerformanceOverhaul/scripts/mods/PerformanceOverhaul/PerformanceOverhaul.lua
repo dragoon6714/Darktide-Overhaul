@@ -22,6 +22,7 @@ local MODULE_NAMES = {
 	"screen_effects",
 	"lighting",
 	"fov",
+	"gc_tuning",
 }
 
 -- Each module file returns a table that may define:
