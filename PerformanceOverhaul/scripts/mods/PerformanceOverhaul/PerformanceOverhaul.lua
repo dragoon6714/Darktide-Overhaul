@@ -20,6 +20,7 @@ local MODULE_NAMES = {
 	"corpse_control",
 	"audio_limiter",
 	"screen_effects",
+	"lighting",
 }
 
 -- Each module file returns a table that may define:

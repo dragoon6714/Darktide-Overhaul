@@ -191,4 +191,29 @@ return {
 		en = "Unchecking blocks explosion/impact camera shake events for a steadier image. "
 			.. "No performance cost either way; purely comfort/visibility.",
 	},
+
+	-- Lighting
+	group_lighting = {
+		en = "Brightness Boost",
+	},
+	group_lighting_description = {
+		en = "Adds exposure on top of the game's lighting for visibility in dark areas. "
+			.. "Note: this does NOT improve FPS — lighting cost is engine-side and cannot be "
+			.. "reduced by mods.",
+	},
+	lighting_enabled = {
+		en = "Enable brightness boost",
+	},
+	lighting_enabled_description = {
+		en = "Master switch. Off = vanilla exposure. This is a visibility feature, not a "
+			.. "performance one; it washes out the game's mood lighting when pushed high.",
+	},
+	lighting_exposure_boost = {
+		en = "Extra exposure",
+	},
+	lighting_exposure_boost_description = {
+		en = "How many stops of exposure to add (applied like the in-game gamma setting). "
+			.. "1.0 lifts shadows noticeably; 3.0 approaches flat/fullbright and looks washed "
+			.. "out. Zero performance impact either way.",
+	},
 }

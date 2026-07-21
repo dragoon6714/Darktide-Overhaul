@@ -138,6 +138,24 @@ return {
 					},
 				},
 			},
+			{
+				setting_id = "group_lighting",
+				type = "group",
+				sub_widgets = {
+					{
+						setting_id = "lighting_enabled",
+						type = "checkbox",
+						default_value = false,
+					},
+					{
+						setting_id = "lighting_exposure_boost",
+						type = "numeric",
+						default_value = 1.0,
+						range = { 0.0, 3.0 },
+						decimals_number = 1,
+					},
+				},
+			},
 		},
 	},
 }
